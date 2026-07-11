@@ -1,7 +1,36 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git)"
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git)",
+      "Bash(npx next:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(netstat -ano)",
+      "Bash(cmd /c \"taskkill /PID 20332 /F\")",
+      "Bash(powershell -Command 'Stop-Process -Id 20332 -Force')",
+      "mcp__mcp-registry__search_mcp_registry",
+      "Bash(bash \"C:/Users/envie/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0/skills/brainstorming/scripts/start-server.sh\" --project-dir \"C:/Users/envie/travel-rate-camera-lp\")",
+      "Bash(cd /c/Users/envie/travel-rate-camera-app && pwd && ls -la .claude/ && ls -la .claude/agents/)",
+      "Bash(git -C /c/Users/envie/travel-rate-camera-app status)",
+      "Bash(git -C /c/Users/envie/travel-rate-camera-app diff --stat)",
+      "Read(//c/Users/envie/travel-rate-camera-app/**)",
+      "Bash(npm run *)",
+      "Bash(cd /c/Users/envie/travel-rate-camera-app && npm run)",
+      "Bash(cd /c/Users/envie/travel-rate-camera-app && find . -type f -name \"*.tsx\" | grep -i \"calendar\\\\|analyt\\\\|chart\\\\|graph\" | head -20)",
+      "Bash(find /c/Users/envie/travel-rate-camera-app/src -type f -name \"*.tsx\" | sort)",
+      "Bash(find /c/Users/envie/travel-rate-camera-app -name \"app.json\" -o -name \"app.config.*\" | head -5)",
+      "Bash(find /c/Users/envie/travel-rate-camera-app/src/db -type f | sort)",
+      "Bash(git -C /c/Users/envie/travel-rate-camera-app diff)",
+      "Bash(npx tsc *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git -C /c/Users/envie/travel-rate-camera-app add src/components/camera/CameraPreview.native.tsx)",
+      "Bash(git -C /c/Users/envie/travel-rate-camera-app commit -m ' *)"
     ]
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
   }
 }
