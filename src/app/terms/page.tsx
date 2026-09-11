@@ -18,7 +18,7 @@ export default function TermsPage() {
           <h1 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2">
             利用規約
           </h1>
-          <p className="text-gray-400 text-sm mb-10">制定日：2026年7月7日</p>
+          <p className="text-gray-400 text-sm mb-10">制定日：2026年7月7日　最終改定日：2026年9月11日</p>
 
           <div className="space-y-10 text-gray-700 leading-relaxed text-[15px]">
             <p>
@@ -63,7 +63,26 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-lg font-bold text-gray-900 mb-3">
-                第5条（免責事項）
+                第5条（有料プラン「Pro」・自動更新サブスクリプション）
+              </h2>
+              <p className="mb-3">
+                本アプリの一部の機能（保存件数・旅行作成数の上限解除、カテゴリー絞り込み・分析、CSV書き出しなど。内容はアプリ内の表示を正とします）は、有料プラン「Pro」の契約者のみご利用いただけます。
+              </p>
+              <ul className="list-disc list-inside space-y-1 mb-3">
+                <li>Proは月額または年額の自動更新サブスクリプションとして、Apple社のApp Storeを通じて提供します。価格はアプリ内およびApp Storeの表示を正とします。</li>
+                <li>お支払いは購入確定時にApple IDに請求されます。契約期間終了の24時間前までに解約されない限り、契約は自動的に更新され、更新時に同じ期間の料金が請求されます。</li>
+                <li>解約・自動更新の停止は、iOSの設定（Apple ID）のサブスクリプション管理から行えます。本アプリを削除しても契約は解約されません。</li>
+                <li>解約後も、契約期間の終了日までは引き続きProの機能をご利用いただけます。期間途中の解約に対する日割り返金は行いません。</li>
+                <li>返金については、Apple社の定める規定・手続きに従います。当方が直接返金を行うことはできません。</li>
+                <li>機種変更などで契約状態が反映されない場合は、アプリ内の「購入を復元」から、同じApple IDでの購入を復元できます。</li>
+                <li>Proの契約が終了した場合、新規の保存・旅行作成などは無料版の上限に戻りますが、契約中に保存した記録・写真・旅行は削除されず、引き続き閲覧・編集・削除できます。</li>
+                <li>当方は、Proで提供する機能の内容や価格を、予告のうえ変更することがあります。</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-lg font-bold text-gray-900 mb-3">
+                第6条（免責事項）
               </h2>
               <p>
                 本アプリの不具合、動作停止、端末の故障・紛失、その他の事由によりお客様のデータが消失・破損した場合であっても、法令上許容される範囲で、これによって生じた損害について当方は責任を負わないものとします。当方は、可能な範囲で本アプリの品質向上に努めます。
@@ -72,7 +91,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-lg font-bold text-gray-900 mb-3">
-                第6条（禁止事項）
+                第7条（禁止事項）
               </h2>
               <p className="mb-3">
                 お客様は、本アプリのご利用にあたり、以下の行為をしてはならないものとします。
@@ -87,7 +106,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-lg font-bold text-gray-900 mb-3">
-                第7条（本規約の変更）
+                第8条（本規約の変更）
               </h2>
               <p>
                 当方は、必要と判断した場合、お客様への予告なく本規約の内容を変更することがあります。変更後の規約は、このページに掲載した時点から効力を生じるものとします。
@@ -96,7 +115,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-lg font-bold text-gray-900 mb-3">
-                第8条（お問い合わせ）
+                第9条（お問い合わせ）
               </h2>
               <p>
                 本規約に関するお問い合わせは、以下までお願いします。
