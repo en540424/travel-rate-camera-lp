@@ -13,20 +13,20 @@ export default function TermsPage() {
     <main className="min-h-screen flex flex-col">
       <Header />
 
-      <div className="flex-1 pt-28 pb-20 px-4">
+      <div className="flex-1 bg-white px-4 pb-20 pt-20">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-text mb-2">
             利用規約
           </h1>
-          <p className="text-gray-400 text-sm mb-10">制定日：2026年7月7日　最終改定日：2026年9月11日</p>
+          <p className="text-faint text-sm mb-10">制定日：2026年7月7日　最終改定日：2026年9月11日</p>
 
-          <div className="space-y-10 text-gray-700 leading-relaxed text-[15px]">
+          <div className="space-y-10 text-body leading-relaxed text-[15px]">
             <p>
               この利用規約（以下「本規約」）は、「旅レートカメラ」（以下「本アプリ」）のご利用にあたっての条件を定めるものです。本アプリをご利用になる場合には、本規約に同意いただいたものとします。
             </p>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 第1条（本アプリの内容）
               </h2>
               <p>
@@ -35,7 +35,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 第2条（換算結果は参考値であること）
               </h2>
               <p>
@@ -44,7 +44,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 第3条（文字認識（OCR）機能について）
               </h2>
               <p>
@@ -53,7 +53,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 第4条（保存データ・予算管理について）
               </h2>
               <p>
@@ -62,7 +62,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 第5条（有料プラン「Pro」・自動更新サブスクリプション）
               </h2>
               <p className="mb-3">
@@ -81,7 +81,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 第6条（免責事項）
               </h2>
               <p>
@@ -90,7 +90,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 第7条（禁止事項）
               </h2>
               <p className="mb-3">
@@ -105,7 +105,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 第8条（本規約の変更）
               </h2>
               <p>
@@ -114,7 +114,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 第9条（お問い合わせ）
               </h2>
               <p>

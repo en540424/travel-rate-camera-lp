@@ -114,13 +114,21 @@ export const CATEGORY_ANALYSIS = ITEMS.filter((i) => i.purchased)
   }))
   .sort((a, b) => b.share - a.share);
 
-/** OCRで読み取れた価格候補（先頭が選択中）。値札に複数の数字が写った状態 */
-export const PRICE_CANDIDATES = ["₩42,900", "₩38,000"] as const;
+/**
+ * いまOCRで読み取って保存しようとしている1件 ＝ ITEMS の先頭（候補として保存前）。
+ * OCR結果画面・カメラ画面・機能紹介の換算例は、すべてここを見る。
+ * **画面側で金額を直書きしない**（1c5809cのずれを繰り返さないため）。
+ */
+export const OCR_SUBJECT = ITEMS[0];
 
-/** OCRで読み取れたメモ候補 */
-export const MEMO_CANDIDATES = [
-  { text: "HERA BLACK CUSHION", added: false },
-] as const;
+/** 金額入力欄の表示。アプリは通貨記号を数値と別に描くので、記号を外した桁だけ渡す */
+export const OCR_SUBJECT_DIGITS = OCR_SUBJECT.foreign.replace(TRIP.symbol, "");
+
+/** OCRで読み取れた価格候補（先頭が選択中）。値札に複数の数字が写った状態 */
+export const PRICE_CANDIDATES = [OCR_SUBJECT.foreign, "₩38,000"] as const;
+
+/** OCRで読み取れたメモ候補。1件目は実際にメモへ入れた文言 */
+export const MEMO_CANDIDATES = [{ text: OCR_SUBJECT.memo, added: false }] as const;
 
 /** 翻訳画面のデモ会話 */
 export const TRANSLATION_DEMO = {

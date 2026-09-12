@@ -41,7 +41,7 @@ export function SectionHeading({
         </span>
       )}
       <h2
-        className={`mt-4 text-[27px] font-bold leading-[1.32] tracking-[-0.02em] sm:text-[34px] ${
+        className={`mt-4 text-balance text-[27px] font-bold leading-[1.32] tracking-[-0.02em] sm:text-[34px] ${
           isDark ? "text-white" : "text-text"
         }`}
       >
@@ -49,7 +49,7 @@ export function SectionHeading({
       </h2>
       {lead && (
         <p
-          className={`mt-5 text-[14.5px] leading-[1.95] sm:text-[15.5px] ${
+          className={`mt-5 text-pretty text-[14.5px] leading-[1.95] sm:text-[15.5px] ${
             isDark ? "text-ink-sub" : "text-body"
           }`}
         >

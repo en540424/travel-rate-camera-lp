@@ -5,21 +5,24 @@ import { LINKS } from "@/lib/appSpec";
 /**
  * フッター。CTAが暗面で終わるので、フッターも暗面で受けて着地させる。
  * 法的導線（プライバシーポリシー・利用規約・ライセンス）と問い合わせは必ず残す。
+ *
+ * ページ内リンクは必ず `/#id` と書く。フッターは /privacy などの下層ページにも出るので、
+ * `#id` だと `/privacy#howto` になって飛ばない（リンク切れになる）。
  */
 const COLUMNS = [
   {
     heading: "アプリ",
     links: [
-      { href: "#howto", label: "使い方" },
-      { href: "#screens", label: "画面を見る" },
-      { href: "#features", label: "できること" },
-      { href: "#pricing", label: "料金" },
+      { href: "/#howto", label: "使い方" },
+      { href: "/#screens", label: "画面を見る" },
+      { href: "/#features", label: "できること" },
+      { href: "/#pricing", label: "料金" },
     ],
   },
   {
     heading: "サポート",
     links: [
-      { href: "#faq", label: "よくある質問" },
+      { href: "/#faq", label: "よくある質問" },
       { href: LINKS.contact, label: "お問い合わせ" },
     ],
   },
@@ -63,27 +66,16 @@ export default function Footer() {
                   {column.heading}
                 </h2>
                 <ul className="mt-4 space-y-2.5">
-                  {column.links.map((link) =>
-                    link.href.startsWith("#") ? (
-                      <li key={link.href}>
-                        <a
-                          href={link.href}
-                          className="text-[12.5px] font-semibold text-ink-sub transition-colors hover:text-white"
-                        >
-                          {link.label}
-                        </a>
-                      </li>
-                    ) : (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className="text-[12.5px] font-semibold text-ink-sub transition-colors hover:text-white"
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ),
-                  )}
+                  {column.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-[12.5px] font-semibold text-ink-sub transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </nav>
             ))}

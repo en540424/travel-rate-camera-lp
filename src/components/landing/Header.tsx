@@ -2,12 +2,16 @@ import Link from "next/link";
 
 import { LINKS } from "@/lib/appSpec";
 
+/**
+ * ページ内リンクは必ず `/#id` と書く。ヘッダーは /privacy などの下層ページにも出るので、
+ * `#id` だと `/privacy#howto` になって飛ばない（リンク切れになる）。
+ */
 const NAV = [
-  { href: "#howto", label: "使い方" },
-  { href: "#screens", label: "画面" },
-  { href: "#features", label: "できること" },
-  { href: "#pricing", label: "料金" },
-  { href: "#faq", label: "よくある質問" },
+  { href: "/#howto", label: "使い方" },
+  { href: "/#screens", label: "画面" },
+  { href: "/#features", label: "できること" },
+  { href: "/#pricing", label: "料金" },
+  { href: "/#faq", label: "よくある質問" },
 ];
 
 /**
@@ -33,22 +37,22 @@ export default function Header() {
 
         <nav className="hidden items-center gap-7 md:flex">
           {NAV.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="text-[13px] font-semibold text-ink-sub transition-colors hover:text-white"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <a
+        <Link
           href={LINKS.appStore ?? LINKS.contact}
           className="flex-none rounded-full bg-brand px-4 py-2 text-[12.5px] font-bold text-white transition-opacity hover:opacity-90"
         >
           {LINKS.appStore ? "App Storeで入手" : "公開のお知らせ"}
-        </a>
+        </Link>
       </div>
     </header>
   );

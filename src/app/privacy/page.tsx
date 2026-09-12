@@ -13,20 +13,20 @@ export default function PrivacyPage() {
     <main className="min-h-screen flex flex-col">
       <Header />
 
-      <div className="flex-1 pt-28 pb-20 px-4">
+      <div className="flex-1 bg-white px-4 pb-20 pt-20">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-text mb-2">
             プライバシーポリシー
           </h1>
-          <p className="text-gray-400 text-sm mb-10">制定日：2026年7月7日　最終改定日：2026年9月11日</p>
+          <p className="text-faint text-sm mb-10">制定日：2026年7月7日　最終改定日：2026年9月11日</p>
 
-          <div className="space-y-10 text-gray-700 leading-relaxed text-[15px]">
+          <div className="space-y-10 text-body leading-relaxed text-[15px]">
             <p>
               「旅レートカメラ」（以下「本アプリ」）は、お客様のプライバシーを尊重します。本ポリシーでは、本アプリが扱う情報とその取り扱いについて説明します。
             </p>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 1. アカウント登録・課金・広告について
               </h2>
               <ul className="list-disc list-inside space-y-1">
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 2. 端末内に保存する情報
               </h2>
               <p className="mb-3">
@@ -50,12 +50,12 @@ export default function PrivacyPage() {
                 <li>翻訳ページの読み上げ音声の設定</li>
               </ul>
               <p>
-                これらの情報は、<strong className="text-gray-900">お使いの端末内にのみ保存</strong>され、当方が運営するサーバーやクラウドへ送信することはありません。氏名・メールアドレス・位置情報を本アプリが取得することはありません。
+                これらの情報は、<strong className="text-text">お使いの端末内にのみ保存</strong>され、当方が運営するサーバーやクラウドへ送信することはありません。氏名・メールアドレス・位置情報を本アプリが取得することはありません。
               </p>
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 3. カメラ・写真・OCR（文字認識）・翻訳について
               </h2>
               <p className="mb-3">
@@ -70,7 +70,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 4. 音声入力（音声認識）について
               </h2>
               <p className="mb-3">
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 5. アプリ内課金（Pro）と第三者サービスについて
               </h2>
               <p className="mb-3">
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 6. 外部への送信・解析について
               </h2>
               <ul className="list-disc list-inside space-y-1">
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 7. データの削除について
               </h2>
               <p>
@@ -119,7 +119,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 8. 本ポリシーの変更について
               </h2>
               <p>
@@ -128,7 +128,7 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-text mb-3">
                 9. お問い合わせ
               </h2>
               <p>

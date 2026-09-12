@@ -32,18 +32,18 @@ export default function LicensesPage() {
     <main className="min-h-screen flex flex-col">
       <Header />
 
-      <div className="flex-1 pt-28 pb-20 px-4">
+      <div className="flex-1 bg-white px-4 pb-20 pt-20">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-2xl sm:text-3xl font-black text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-text mb-2">
             ライセンス
           </h1>
-          <p className="text-gray-500 mb-10">
+          <p className="text-muted mb-10">
             このサイト（旅レートカメラ 公式サイト）は、以下のオープンソースソフトウェアを使用しています。
           </p>
 
-          <div className="overflow-x-auto rounded-2xl border border-gray-200">
+          <div className="overflow-x-auto rounded-2xl border border-line">
             <table className="w-full text-sm text-left">
-              <thead className="bg-gray-50 text-gray-500">
+              <thead className="bg-screen text-muted">
                 <tr>
                   <th className="px-4 py-3 font-bold">ライブラリ</th>
                   <th className="px-4 py-3 font-bold">用途</th>
@@ -51,20 +51,20 @@ export default function LicensesPage() {
                   <th className="px-4 py-3 font-bold">備考</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-line">
                 {libraries.map((lib) => (
                   <tr key={lib.name}>
-                    <td className="px-4 py-3 font-medium text-gray-900">{lib.name}</td>
-                    <td className="px-4 py-3 text-gray-600">{lib.purpose}</td>
-                    <td className="px-4 py-3 text-gray-600">{lib.license}</td>
-                    <td className="px-4 py-3 text-gray-400">{lib.note ?? "-"}</td>
+                    <td className="px-4 py-3 font-medium text-text">{lib.name}</td>
+                    <td className="px-4 py-3 text-body">{lib.purpose}</td>
+                    <td className="px-4 py-3 text-body">{lib.license}</td>
+                    <td className="px-4 py-3 text-faint">{lib.note ?? "-"}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <p className="text-gray-400 text-xs mt-6 leading-relaxed">
+          <p className="text-faint text-xs mt-6 leading-relaxed">
             上記は本サイトが直接利用しているライブラリの一覧であり、各ライブラリが内部で利用する依存ライブラリまでは網羅していません。ライセンス表記の詳細は、各ライブラリの配布元をご確認ください。
           </p>
 

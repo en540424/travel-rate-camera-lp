@@ -1,5 +1,11 @@
 import { Card, Overline, StatusBar, TabBar, TripRateHeader } from "../chrome";
-import { MEMO_CANDIDATES, PRICE_CANDIDATES, TRIP } from "../demoData";
+import {
+  MEMO_CANDIDATES,
+  OCR_SUBJECT,
+  OCR_SUBJECT_DIGITS,
+  PRICE_CANDIDATES,
+  TRIP,
+} from "../demoData";
 
 /**
  * OCR結果（成功）画面のモック ＝ LPの主役。
@@ -107,7 +113,7 @@ export default function OcrResultScreen({ scrolled = false }: { scrolled?: boole
                 {TRIP.symbol}
               </span>
               <span className="flex-1 text-[36px] font-extrabold leading-none tracking-[-0.5px] text-text tabular">
-                42,900
+                {OCR_SUBJECT_DIGITS}
               </span>
             </div>
 
@@ -117,10 +123,10 @@ export default function OcrResultScreen({ scrolled = false }: { scrolled?: boole
                 日本円で
               </span>
               <span className="text-[48px] font-bold leading-[1.05] tracking-[-1.6px] text-text tabular">
-                ¥4,719
+                {OCR_SUBJECT.jpy}
               </span>
               <span className="mt-[3px] text-[13px] font-medium text-muted tabular">
-                ₩42,900　・　{TRIP.rateLabel}
+                {OCR_SUBJECT.foreign}　・　{TRIP.rateLabel}
               </span>
             </div>
 
@@ -151,7 +157,7 @@ export default function OcrResultScreen({ scrolled = false }: { scrolled?: boole
 
             {/* 保存CTA */}
             <div className="flex h-[52px] items-center justify-center rounded-button bg-brand text-[17px] font-bold text-white shadow-[0_8px_18px_-6px_rgba(14,148,136,0.5)]">
-              ¥4,719 を候補に保存
+              {OCR_SUBJECT.jpy} を候補に保存
             </div>
             <div className="text-center text-[13px] font-semibold text-body">
               保存しないで次を撮る →

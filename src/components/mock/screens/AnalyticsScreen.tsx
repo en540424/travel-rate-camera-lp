@@ -8,7 +8,9 @@ import { CATEGORY_ANALYSIS, TOTALS } from "../demoData";
  *   - 期間切替（今日 / 月 / 年）・期間ナビ（‹ 2026年9月 ›）
  *   - 「◯年◯月のまとめ」カードの2×2（購入済み合計 / 候補合計 / 保存件数 / 購入済み）
  *     ＝ **無料版でも使える**
- *   - 「今月のカテゴリー別」カード ＝ **Proのみ**。Proバッジを付けて区別する
+ *   - 「今月のカテゴリー別」カード ＝ **Proのみ**。ここではPro加入時の状態を描く
+ *     （アプリは未加入ならProバッジ＋ロック表示で、中身とバッジは同時に出ない。
+ *      Proであることはセクションのキャプションと料金表で伝える）
  *   - 棒グラフの棒色は tokens.ts の chartBar（#7F8FC4）、選択中は primaryDark
  */
 
@@ -20,7 +22,7 @@ export default function AnalyticsScreen() {
     <>
       <StatusBar time="20:11" />
 
-      <div className="flex flex-1 flex-col gap-[14px] overflow-hidden px-[15px] pt-[8px]">
+      <div className="relative flex flex-1 flex-col gap-[14px] overflow-hidden px-[15px] pt-[8px]">
         <span className="text-[20px] font-bold tracking-[-0.3px] text-text">分析</span>
 
         {/* 期間切替 */}
@@ -117,12 +119,7 @@ export default function AnalyticsScreen() {
 
         {/* 今月のカテゴリー別（Pro） */}
         <div className="flex flex-col gap-[14px] rounded-card-lg border border-line bg-card p-[15px] shadow-[0_1px_2px_rgba(16,33,31,0.04)]">
-          <div className="flex items-center gap-[8px]">
-            <span className="text-[14px] font-bold text-text">今月のカテゴリー別</span>
-            <span className="rounded-full bg-pro-soft px-[8px] py-[3px] text-[10.5px] font-bold text-pro">
-              Pro
-            </span>
-          </div>
+          <span className="text-[14px] font-bold text-text">今月のカテゴリー別</span>
           <div className="flex flex-col">
             {CATEGORY_ANALYSIS.map((category, index) => (
               <div
@@ -154,6 +151,12 @@ export default function AnalyticsScreen() {
             ))}
           </div>
         </div>
+
+        {/* 下にまだ続くことを示すフェード（実装上この画面はScrollView） */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-0 left-0 right-0 h-[26px] bg-gradient-to-t from-screen to-transparent"
+        />
       </div>
 
       <TabBar active="分析" />

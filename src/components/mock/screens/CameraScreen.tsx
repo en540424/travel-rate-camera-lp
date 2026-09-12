@@ -1,5 +1,5 @@
 import { StatusBar, TabBar, TripRateHeader } from "../chrome";
-import { TOTALS, TRIP } from "../demoData";
+import { OCR_SUBJECT, TOTALS, TRIP } from "../demoData";
 
 /**
  * メイン画面（価格OCRモード・撮影前）のモック。
@@ -36,7 +36,7 @@ export default function CameraScreen() {
               HERA
             </div>
             <div className="text-[22px] font-bold leading-tight text-[#2A2620] tabular">
-              ₩42,900
+              {OCR_SUBJECT.foreign}
             </div>
           </div>
 
