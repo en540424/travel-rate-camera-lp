@@ -1,50 +1,67 @@
+import { SectionHeading } from "@/components/ui/Section";
+
+/**
+ * 課題提示。
+ *
+ * カードを3枚並べるのをやめ、番号を大きく取った編集的な3列にしている。
+ * 地色は candidate（amber）系の極薄。amberはアプリで「まだ買うか決めていない＝候補」を
+ * 意味する色なので、「迷っている場面」を扱うこのセクションと意味が合う。
+ */
 const PROBLEMS = [
   {
-    icon: "?",
+    n: "01",
     title: "結局いくら？",
-    desc: "「₩42,900」と言われても、日本円でいくらなのかがとっさに出てこない。",
+    desc: "「₩42,900」と言われても、日本円でいくらなのかがとっさに出てこない。店員さんを待たせたまま固まる。",
   },
   {
-    icon: "×",
-    title: "毎回スマホで計算",
-    desc: "電卓アプリを開いてレートを打ち直す。店の前で立ち止まる時間がもったいない。",
+    n: "02",
+    title: "毎回、電卓を開く",
+    desc: "電卓アプリを開いてレートを打ち直す。1点ならまだしも、まとめ買いだと合計が追えなくなる。",
   },
   {
-    icon: "!",
-    title: "使いすぎに後で気づく",
-    desc: "帰国してカードの明細を見て青ざめる。旅行中は合計がわからない。",
+    n: "03",
+    title: "使いすぎに、後で気づく",
+    desc: "帰国してから明細を見て青ざめる。旅行中に「今いくら使ったか」が見えていない。",
   },
 ];
 
 export default function ProblemSection() {
   return (
-    <section className="bg-white py-16 md:py-20">
+    <section className="ground-warm py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-5">
-        <div className="mx-auto max-w-xl text-center">
-          <h2 className="text-[26px] font-bold leading-snug tracking-tight text-text sm:text-[30px]">
-            海外での買い物、
-            <br className="sm:hidden" />
-            こんなことありませんか。
-          </h2>
-        </div>
+        <SectionHeading
+          align="left"
+          eyebrow="よくある困りごと"
+          title={
+            <>
+              海外の買い物で、
+              <br className="sm:hidden" />
+              いちばん面倒なこと。
+            </>
+          }
+        />
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {PROBLEMS.map((p) => (
-            <div
-              key={p.title}
-              className="rounded-card-lg border border-line bg-screen p-6"
-            >
-              <span
-                aria-hidden
-                className="flex h-9 w-9 items-center justify-center rounded-[11px] bg-danger-soft text-[17px] font-bold text-danger"
-              >
-                {p.icon}
+        <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
+          {PROBLEMS.map((problem) => (
+            <div key={problem.n} className="border-t-2 border-candidate/35 pt-6">
+              <span className="block text-[13px] font-bold tracking-[0.12em] text-candidate-strong tabular">
+                {problem.n}
               </span>
-              <h3 className="mt-4 text-[16px] font-bold text-text">{p.title}</h3>
-              <p className="mt-2 text-[13.5px] leading-[1.85] text-body">{p.desc}</p>
+              <h3 className="mt-4 text-[20px] font-bold leading-snug tracking-[-0.01em] text-text sm:text-[22px]">
+                {problem.title}
+              </h3>
+              <p className="mt-3 text-[14px] leading-[1.95] text-body">{problem.desc}</p>
             </div>
           ))}
         </div>
+
+        {/* 解決への転換。次セクションへの導線として機能させる */}
+        <p className="mt-16 max-w-xl text-[18px] font-bold leading-[1.75] tracking-[-0.01em] text-text sm:text-[22px]">
+          暗算も電卓もやめて、
+          <span className="text-brand">換算はカメラに任せる。</span>
+          <br />
+          決めるのは「買うかどうか」だけでいい。
+        </p>
       </div>
     </section>
   );

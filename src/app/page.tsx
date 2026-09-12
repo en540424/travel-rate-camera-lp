@@ -1,39 +1,36 @@
+import CTASection from "@/components/landing/CTASection";
+import FAQSection from "@/components/landing/FAQSection";
+import FeatureSection from "@/components/landing/FeatureSection";
+import Footer from "@/components/landing/Footer";
 import Header from "@/components/landing/Header";
 import HeroSection from "@/components/landing/HeroSection";
-import ProblemSection from "@/components/landing/ProblemSection";
-import SolutionSection from "@/components/landing/SolutionSection";
-import FeatureSection from "@/components/landing/FeatureSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import PricingSection from "@/components/landing/PricingSection";
+import ProblemSection from "@/components/landing/ProblemSection";
+import ScreensSection from "@/components/landing/ScreensSection";
 import UseCaseSection from "@/components/landing/UseCaseSection";
-import FAQSection from "@/components/landing/FAQSection";
-import CTASection from "@/components/landing/CTASection";
-import Footer from "@/components/landing/Footer";
 
+/**
+ * トップページ。
+ *
+ * セクションの並びは「5秒で価値が伝わる → スクロールしたくなる → 納得して選べる」順。
+ * 地色を 暗 → 温 → 白 → 暗 → 淡ティール → グレー → 白 → 温 → 暗 と入れ替えて、
+ * 白カードが延々と続く単調さを避けている（各セクションのコメント参照）。
+ */
 export default function Home() {
   return (
     <>
       <Header />
       <main>
-        <div id="hero">
-          <HeroSection />
-        </div>
+        <HeroSection />
         <ProblemSection />
-        <SolutionSection />
-        <div id="features">
-          <FeatureSection />
-        </div>
-        <div id="howto">
-          <HowItWorksSection />
-        </div>
-        <PricingSection />
+        <HowItWorksSection />
+        <ScreensSection />
+        <FeatureSection />
         <UseCaseSection />
-        <div id="faq">
-          <FAQSection />
-        </div>
-        <div id="cta">
-          <CTASection />
-        </div>
+        <PricingSection />
+        <FAQSection />
+        <CTASection />
       </main>
       <Footer />
     </>

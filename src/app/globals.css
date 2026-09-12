@@ -6,6 +6,10 @@
  * 色・角丸の値は本体アプリの `src/theme/tokens.ts`（travel-rate-camera-app）を正とし、
  * そこから機械的に写している。LP側で独自の色を足さない。
  * アプリ側tokenが変わった場合はこのブロックを合わせて更新する。
+ *
+ * 補助色は新規に発明せず、アプリが既に持つ candidate（amber）を使う。
+ * amberはアプリ側で「候補＝まだ買うか決めていないもの」を意味する色なので、
+ * LPでもその意味が通る場所（候補の説明・迷う→決める文脈・温かい面）だけで使う。
  */
 @theme {
   /* brand / primary (teal) ― 主役・CTA */
@@ -16,7 +20,7 @@
   --color-brand-border: #D7EDE7;
   --color-brand-accent: #7FD8CC;
 
-  /* candidate (amber) ― 買い物候補 */
+  /* candidate (amber) ― 買い物候補／LPの補助色 */
   --color-candidate: #E0A53B;
   --color-candidate-text: #9A6516;
   --color-candidate-strong: #B5731A;
@@ -33,6 +37,7 @@
   /* dark hero */
   --color-ink: #11201E;
   --color-ink-alt: #16211F;
+  --color-ink-deep: #0E1413; /* 端末ベゼル（design-handoff の .bezel と同値） */
   --color-ink-muted: #8FA39E;
   --color-ink-sub: #A9BAB5;
 
@@ -57,6 +62,11 @@
   --color-danger-soft: #FBF3F1;
   --color-danger-border: #F0D9D4;
 
+  /* 分析画面の棒グラフ（アプリ tokens.ts の chartBar） */
+  --color-chart-bar: #7F8FC4;
+  /* 下タブの非選択（アプリ tokens.ts の tabInactive） */
+  --color-tab-inactive: #4F5865;
+
   /* radius ― tokens.ts の radius に対応 */
   --radius-chip: 12px;
   --radius-card: 16px;
@@ -68,6 +78,17 @@
 :root {
   --background: #ffffff;
   --foreground: #16211F;
+}
+
+/* ヘッダー分のオフセットは各セクションの scroll-mt で持たせている */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -82,37 +103,78 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* ── セクションの地色 ───────────────────────────────────────────
+   白カードを並べるだけの単調さを避けるため、セクションごとに地を変える。
+   暗い面 → 温かい面 → 白 → 暗い面 … の順で視覚的リズムを作る。 */
+
+/* 暗面（Hero・実画面ギャラリー）。アプリのダークヒーロー面に対応 */
+.ground-ink {
+  background:
+    radial-gradient(120% 80% at 15% 0%, rgba(14, 148, 136, 0.22) 0%, transparent 60%),
+    radial-gradient(90% 70% at 100% 100%, rgba(224, 165, 59, 0.1) 0%, transparent 58%),
+    linear-gradient(160deg, #16211F 0%, #11201E 55%, #0C1716 100%);
 }
 
-@keyframes scan {
-  0% { top: 12%; }
-  50% { top: 78%; }
-  100% { top: 12%; }
+/* 暗面の上に敷く方眼。アプリアイコンのグリッド意匠に対応（画像を使わずCSSのみ） */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 75%);
 }
 
-.float-animation {
-  animation: float 5s ease-in-out infinite;
+/* 温かい面（課題提示・利用シーン）。candidate系の極薄 */
+.ground-warm {
+  background: linear-gradient(180deg, #FAF3E6 0%, #FDF9F1 48%, #FFFFFF 100%);
 }
 
-.scan-line {
-  animation: scan 2.8s ease-in-out infinite;
+/* ティールの極薄面（機能紹介・料金の導入） */
+.ground-mint {
+  background: linear-gradient(180deg, #E4F4EF 0%, #F2FBF8 45%, #FFFFFF 100%);
 }
 
-/* 端末モックの画面グラデーション（アプリのダークヒーロー面に対応） */
-.gradient-ink {
-  background: linear-gradient(155deg, #16211F 0%, #11201E 55%, #0E1A18 100%);
+/* 最終CTA。ティール→暗面。CTA面だけ彩度を上げて着地させる */
+.ground-cta {
+  background:
+    radial-gradient(90% 120% at 20% 0%, rgba(127, 216, 204, 0.28) 0%, transparent 62%),
+    linear-gradient(150deg, #0A766E 0%, #0E5F59 46%, #11201E 100%);
 }
 
 .gradient-pro {
   background: linear-gradient(135deg, var(--color-pro-gold-a) 0%, var(--color-pro-gold-b) 100%);
 }
 
+/* 端末モックの画面グラデーション（カメラプレビューの暗面） */
+.gradient-viewfinder {
+  background: linear-gradient(155deg, #33413C 0%, #1E2B28 55%, #12201D 100%);
+}
+
+/* ── アニメーション ─────────────────────────────────────────── */
+
+@keyframes scan {
+  0% { transform: translateY(0); opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: translateY(var(--scan-distance, 120px)); opacity: 0; }
+}
+
+.scan-line {
+  animation: scan 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .float-animation,
-  .scan-line {
+  .scan-line,
+  .rise {
     animation: none;
   }
 }

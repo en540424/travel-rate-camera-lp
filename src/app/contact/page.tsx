@@ -22,6 +22,30 @@ export default function ContactPage() {
             「旅レートカメラ」に関するご質問・不具合のご報告は、以下のメールアドレスまでお願いします。
           </p>
 
+          {/* 公開前のLPからのCTA（「公開のお知らせを受け取る」）の着地先。
+              フォーム送信先の新設はHuman-only領域なので、既存のサポートメールに
+              件名だけ添えて案内する。新しい送信先・外部サービスは追加していない。 */}
+          <div className="mb-10 rounded-3xl border-2 border-brand bg-brand-soft2 p-7">
+            <div className="mb-2 text-sm font-bold text-brand-dark">
+              App Store公開のお知らせをご希望の方へ
+            </div>
+            <p className="mb-4 text-[15px] leading-relaxed text-gray-700">
+              現在、App Storeでの公開を準備中です。公開時にお知らせをご希望の場合は、
+              件名を「公開通知希望」としてサポートメールへお送りください。
+              公開が決まりましたらご連絡します。
+            </p>
+            <a
+              href="mailto:support@e-nexus.shop?subject=%E5%85%AC%E9%96%8B%E9%80%9A%E7%9F%A5%E5%B8%8C%E6%9C%9B%EF%BC%88%E6%97%85%E3%83%AC%E3%83%BC%E3%83%88%E3%82%AB%E3%83%A1%E3%83%A9%EF%BC%89"
+              className="inline-flex items-center justify-center gap-2 rounded-[15px] bg-brand px-6 py-3.5 text-[15px] font-bold text-white transition-opacity hover:opacity-90"
+            >
+              「公開通知希望」でメールを作成
+              <span aria-hidden>→</span>
+            </a>
+            {/* メールアドレスの取り扱い方針を新たに宣言することはしない
+                （プライバシーポリシー本文の範囲外の約束をLP側で作らないため）。
+                必要なら人間が追記する。 */}
+          </div>
+
           <div className="bg-gray-50 border border-gray-200 rounded-3xl p-7 mb-10">
             <div className="text-sm font-bold text-gray-500 mb-2">サポートメール</div>
             <a
