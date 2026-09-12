@@ -1,14 +1,85 @@
 @import "tailwindcss";
 
+/**
+ * 旅レートカメラ LP テーマ
+ *
+ * 色・角丸の値は本体アプリの `src/theme/tokens.ts`（travel-rate-camera-app）を正とし、
+ * そこから機械的に写している。LP側で独自の色を足さない。
+ * アプリ側tokenが変わった場合はこのブロックを合わせて更新する。
+ */
+@theme {
+  /* brand / primary (teal) ― 主役・CTA */
+  --color-brand: #0E9488;
+  --color-brand-dark: #0A766E;
+  --color-brand-soft: #E7F5F2;
+  --color-brand-soft2: #F0FAF7;
+  --color-brand-border: #D7EDE7;
+  --color-brand-accent: #7FD8CC;
+
+  /* candidate (amber) ― 買い物候補 */
+  --color-candidate: #E0A53B;
+  --color-candidate-text: #9A6516;
+  --color-candidate-strong: #B5731A;
+  --color-candidate-soft: #FBF1DE;
+  --color-candidate-soft2: #FDFAF3;
+  --color-candidate-border: #F0E6CF;
+
+  /* Pro (gold accent) ― バッジ・識別のみ。CTAはbrandを使う */
+  --color-pro: #B5731A;
+  --color-pro-soft: #FBF1DE;
+  --color-pro-gold-a: #EBC976;
+  --color-pro-gold-b: #D9A441;
+
+  /* dark hero */
+  --color-ink: #11201E;
+  --color-ink-alt: #16211F;
+  --color-ink-muted: #8FA39E;
+  --color-ink-sub: #A9BAB5;
+
+  /* text */
+  --color-text: #16211F;
+  --color-body: #5B6764;
+  --color-muted: #7E8986;
+  --color-faint: #939E9B;
+  --color-faint2: #A6AEAB;
+
+  /* surfaces */
+  --color-bg: #EAEEEC;
+  --color-screen: #F4F6F5;
+  --color-card: #FFFFFF;
+  --color-line: #ECEFED;
+  --color-line2: #EEF1F0;
+  --color-line3: #F2F4F3;
+  --color-input-border: #DCE3E0;
+
+  /* destructive */
+  --color-danger: #C2543F;
+  --color-danger-soft: #FBF3F1;
+  --color-danger-border: #F0D9D4;
+
+  /* radius ― tokens.ts の radius に対応 */
+  --radius-chip: 12px;
+  --radius-card: 16px;
+  --radius-card-lg: 18px;
+  --radius-button: 15px;
+  --radius-phone: 38px;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #16211F;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", Arial, sans-serif;
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo",
+    system-ui, -apple-system, Arial, sans-serif;
+}
+
+/* 金額は等幅数字（アプリ側 typography.numeric と対応） */
+.tabular {
+  font-variant-numeric: tabular-nums;
 }
 
 @keyframes float {
@@ -16,29 +87,32 @@ body {
   50% { transform: translateY(-10px); }
 }
 
-@keyframes pulse-ring {
-  0% { transform: scale(0.9); opacity: 1; }
-  100% { transform: scale(1.4); opacity: 0; }
-}
-
 @keyframes scan {
-  0% { top: 10%; }
-  50% { top: 85%; }
-  100% { top: 10%; }
+  0% { top: 12%; }
+  50% { top: 78%; }
+  100% { top: 12%; }
 }
 
 .float-animation {
-  animation: float 4s ease-in-out infinite;
+  animation: float 5s ease-in-out infinite;
 }
 
 .scan-line {
-  animation: scan 2.5s ease-in-out infinite;
+  animation: scan 2.8s ease-in-out infinite;
 }
 
-.gradient-hero {
-  background: linear-gradient(135deg, #EAF6FF 0%, #DBEAFE 40%, #EFF6FF 100%);
+/* 端末モックの画面グラデーション（アプリのダークヒーロー面に対応） */
+.gradient-ink {
+  background: linear-gradient(155deg, #16211F 0%, #11201E 55%, #0E1A18 100%);
 }
 
-.gradient-cta {
-  background: linear-gradient(135deg, #0B1F4D 0%, #0066FF 100%);
+.gradient-pro {
+  background: linear-gradient(135deg, var(--color-pro-gold-a) 0%, var(--color-pro-gold-b) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-animation,
+  .scan-line {
+    animation: none;
+  }
 }

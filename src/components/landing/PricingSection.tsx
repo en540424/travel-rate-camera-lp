@@ -1,116 +1,101 @@
+import { FREE_FEATURES, PRO_FEATURES, PRICING, FREE_LIMITS } from "@/lib/appSpec";
+
+/**
+ * 料金セクション。
+ *
+ * 掲載してよいのは appSpec.ts の FREE_FEATURES / PRO_FEATURES（＝実装済み）のみ。
+ * 自動為替取得・クラウドOCR・PDF出力などの将来候補を「Proでできること」として書かない。
+ * 価格はHuman確定値（月額¥500／年額¥4,000）。
+ */
 export default function PricingSection() {
-  const freeFeatures = [
-    { label: "手入力レートで円換算", included: true },
-    { label: "ライブ円換算（お試し）", included: true },
-    { label: "基本の買い物メモ保存", included: true },
-    { label: "合計金額の表示", included: true },
-    { label: "旅行1件まで管理", included: true },
-    { label: "保存件数あり（上限あり）", included: true },
-    { label: "自動レート取得", included: false },
-    { label: "ライブ円換算 無制限", included: false },
-    { label: "複数旅行の管理", included: false },
-  ];
-
-  const proFeatures = [
-    { label: "ライブ円換算 無制限", included: true },
-    { label: "自動レート取得", included: true },
-    { label: "手入力レートも使える", included: true },
-    { label: "買い物メモ 保存無制限", included: true },
-    { label: "複数旅行の管理", included: true },
-    { label: "予算管理機能", included: true },
-    { label: "カード手数料込み表示", included: true },
-    { label: "商品の写真保存", included: true },
-    { label: "オフライン用レート保存", included: true },
-  ];
-
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4">
-        {/* ヘッダー */}
-        <div className="text-center mb-12">
-          <div className="inline-block bg-purple-50 border border-purple-200 text-purple-600 text-sm font-bold px-4 py-1.5 rounded-full mb-4">
-            料金プラン
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900">
-            無料で試せて、
-            <span className="text-purple-600">Proでもっと便利に。</span>
+    <section id="pricing" className="bg-white py-16 md:py-24">
+      <div className="mx-auto max-w-6xl px-5">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="text-[12px] font-bold uppercase tracking-[0.08em] text-brand">
+            Pricing
+          </span>
+          <h2 className="mt-3 text-[26px] font-bold leading-snug tracking-tight text-text sm:text-[32px]">
+            まずは無料で。
+            <br className="sm:hidden" />
+            足りなくなったらPro。
           </h2>
-          <p className="text-gray-500 mt-3 text-base">
-            まずは無料版から。旅行が増えるほど、Proが活きてきます。
+          <p className="mt-4 text-[14.5px] leading-[1.9] text-body">
+            換算・翻訳・音声はすべて無料です。保存の上限と旅行の数だけがProとの違いです。
           </p>
         </div>
 
-        {/* プランカード */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div className="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-2">
           {/* 無料版 */}
-          <div className="bg-white border-2 border-gray-200 rounded-3xl p-7 shadow-sm">
-            <div className="mb-6">
-              <div className="text-sm font-bold text-gray-500 mb-1">無料版</div>
-              <div className="text-3xl font-black text-gray-900">¥0</div>
-              <div className="text-gray-400 text-sm mt-1">基本機能をお試しいただけます</div>
-            </div>
+          <div className="rounded-card-lg border border-line bg-white p-7">
+            <h3 className="text-[17px] font-bold text-text">無料版</h3>
+            <p className="mt-1 text-[13px] font-medium text-muted">
+              旅行の買い物に必要な機能は無料で使えます
+            </p>
+            <p className="mt-5 text-[34px] font-bold leading-none text-text tabular">
+              ¥0
+            </p>
 
-            <ul className="space-y-3 mb-6">
-              {freeFeatures.map((f, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <span className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold ${
-                    f.included
-                      ? "bg-green-100 text-green-600"
-                      : "bg-gray-100 text-gray-400"
-                  }`}>
-                    {f.included ? "✓" : "×"}
+            <ul className="mt-7 space-y-3">
+              {FREE_FEATURES.map((f) => (
+                <li key={f} className="flex gap-2.5 text-[13.5px] leading-[1.7] text-body">
+                  <span aria-hidden className="mt-[3px] shrink-0 font-bold text-brand">
+                    ✓
                   </span>
-                  <span className={`text-sm ${f.included ? "text-gray-700" : "text-gray-400"}`}>
-                    {f.label}
-                  </span>
+                  {f}
                 </li>
               ))}
             </ul>
-
-            <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-2xl transition-colors text-sm">
-              無料版を使う（公開予定）
-            </button>
           </div>
 
           {/* Pro版 */}
-          <div className="bg-gradient-to-b from-blue-600 to-blue-700 border-2 border-blue-500 rounded-3xl p-7 shadow-xl relative overflow-hidden">
-            {/* おすすめバッジ */}
-            <div className="absolute top-4 right-4 bg-yellow-400 text-yellow-900 text-xs font-black px-3 py-1 rounded-full">
-              おすすめ
+          <div className="relative rounded-card-lg border-2 border-brand bg-brand-soft2 p-7">
+            <span className="gradient-pro absolute -top-3 left-7 rounded-full px-3 py-1 text-[11px] font-bold text-white">
+              Pro
+            </span>
+
+            <h3 className="text-[17px] font-bold text-text">Pro版</h3>
+            <p className="mt-1 text-[13px] font-medium text-muted">
+              旅行が増えても、保存を気にせず使えます
+            </p>
+
+            <div className="mt-5 flex items-baseline gap-2">
+              <span className="text-[34px] font-bold leading-none text-text tabular">
+                ¥{PRICING.monthlyYen.toLocaleString("ja-JP")}
+              </span>
+              <span className="text-[13.5px] font-semibold text-muted">/ 月</span>
             </div>
+            <p className="mt-2 text-[13px] font-semibold text-brand-dark tabular">
+              年額 ¥{PRICING.annualYen.toLocaleString("ja-JP")}
+              <span className="ml-1.5 font-medium text-muted">
+                （月あたり約 ¥{PRICING.annualPerMonthYen.toLocaleString("ja-JP")}・
+                月額より約{PRICING.annualDiscountPercent}%おトク）
+              </span>
+            </p>
 
-            {/* 背景装飾 */}
-            <div className="absolute bottom-0 right-0 w-32 h-32 bg-white/5 rounded-tl-full" />
-
-            <div className="mb-6">
-              <div className="text-sm font-bold text-blue-200 mb-1">Pro版</div>
-              <div className="text-3xl font-black text-white">価格未定</div>
-              <div className="text-blue-300 text-sm mt-1">アプリ公開時に案内予定</div>
-            </div>
-
-            <ul className="space-y-3 mb-6">
-              {proFeatures.map((f, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 text-white flex items-center justify-center text-xs font-bold">
+            <ul className="mt-7 space-y-3">
+              {PRO_FEATURES.map((f) => (
+                <li key={f} className="flex gap-2.5 text-[13.5px] leading-[1.7] text-body">
+                  <span aria-hidden className="mt-[3px] shrink-0 font-bold text-brand">
                     ✓
                   </span>
-                  <span className="text-sm text-blue-100">{f.label}</span>
+                  <span className="font-semibold text-text">{f}</span>
                 </li>
               ))}
             </ul>
 
-            <button className="w-full bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 rounded-2xl transition-colors text-sm shadow-md">
-              Pro版の公開を待つ
-            </button>
+            <p className="mt-6 border-t border-brand-border pt-4 text-[12px] leading-[1.8] text-muted">
+              無料版との違いは上記のみです。カメラでの円換算・翻訳・音声入力・読み上げは、
+              無料版でも回数の制限なくお使いいただけます。
+            </p>
           </div>
         </div>
 
-        {/* 補足 */}
-        <div className="text-center mt-6">
-          <p className="text-gray-400 text-sm">
-            ※ Pro版の価格・提供形式（買い切り / サブスクリプション）はアプリ公開時にご案内します
-          </p>
-        </div>
+        <p className="mx-auto mt-8 max-w-2xl text-center text-[12px] leading-[1.9] text-muted">
+          無料版では、同時に管理できる旅行が{FREE_LIMITS.trips}件、
+          1つの旅行につき{FREE_LIMITS.savesPerTrip}件まで保存できます。
+          価格はApp Storeの表示を正とします。購入・解約はApp Storeの購読管理から行えます。
+        </p>
       </div>
     </section>
   );

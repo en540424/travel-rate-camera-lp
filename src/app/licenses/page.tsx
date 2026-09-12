@@ -69,7 +69,7 @@ export default function LicensesPage() {
           </p>
 
           <div className="mt-16">
-            <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            <Link href="/" className="text-brand hover:text-brand-dark text-sm font-medium">
               ← トップページに戻る
             </Link>
           </div>

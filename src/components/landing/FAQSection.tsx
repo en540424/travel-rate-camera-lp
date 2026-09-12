@@ -1,108 +1,80 @@
-"use client";
+import { FREE_LIMITS, PRICING } from "@/lib/appSpec";
 
-import { useState } from "react";
-import Link from "next/link";
-
-const faqs = [
+/**
+ * 回答は本体アプリの実装事実に一致させる。
+ * 未実装機能（自動為替取得など）を「できる」と書かない。できないことは、できないと書く。
+ */
+const FAQS = [
   {
     q: "無料で使えますか？",
-    a: "無料でご利用いただけます。手入力レートでの円換算や、買い物メモの保存など、基本機能を無料でお使いいただけます。",
+    a: `はい。カメラでの円換算・通貨換算・翻訳・音声入力・読み上げ・カテゴリー選択は、無料版で回数の制限なくお使いいただけます。無料版では、同時に管理できる旅行が${FREE_LIMITS.trips}件、1つの旅行につき${FREE_LIMITS.savesPerTrip}件まで保存できます。`,
   },
   {
-    q: "レートは自動取得できますか？",
-    a: "レートはご自身で設定する方式です。両替時のレートやカードのレートなど、ご自身の感覚に合うレートを入力してご利用いただけます。旅行前に入力しておけば、現地ですぐ使えます。",
+    q: "Proにすると何が変わりますか？",
+    a: "保存が無制限になり、複数の旅行を同時に管理できます。あわせて、カテゴリーでの絞り込み・カテゴリー別の分析・CSVエクスポートが使えます。カメラや翻訳などの基本機能は無料版と同じです。",
   },
   {
-    q: "手入力レートも使えますか？",
-    a: "はい。ご自身が両替したレートやカード決済レートを入力してご利用いただけます。",
+    q: "Proの料金はいくらですか？",
+    a: `月額 ¥${PRICING.monthlyYen.toLocaleString("ja-JP")}、年額 ¥${PRICING.annualYen.toLocaleString("ja-JP")} です。年額は月あたり約 ¥${PRICING.annualPerMonthYen.toLocaleString("ja-JP")} になります。最新の価格はApp Storeの表示をご確認ください。`,
   },
   {
-    q: "カメラで通貨記号も自動判定できますか？",
-    a: "本アプリでは、ユーザーが事前に「USD→JPY」「KRW→JPY」などの換算モードを選択する方式です。通貨記号の自動判定には対応していませんが、認識精度と速度を優先した設計のため、数字の読み取りは精度よく動作します。",
+    q: "レートは自動で取得されますか？",
+    a: "いいえ。レートはご自身で入力していただく方式です。両替時のレートやカード決済のレートなど、実際にご自身が使うレートを入力できるため、感覚に合う金額で判断できます。旅行前に入力しておけば、現地ですぐ使えます。",
   },
   {
-    q: "オフラインでも使えますか？",
-    a: "手入力レートは端末内で計算するため、通信が不安定な場面でもそのまま円換算に使えます。旅行前にレートを設定しておくと安心です。",
+    q: "通貨記号は自動で判定されますか？",
+    a: "いいえ。事前に「USD→JPY」「KRW→JPY」のように換算モードを選んでいただく方式です。読み取りの精度と速度を優先した設計のため、数字の読み取りは安定して動作します。",
   },
   {
-    q: "対応通貨は何ですか？",
-    a: "主要6通貨（USD・KRW・TWD・THB・EUR・GBP）に対応しています。",
+    q: "電波がない場所でも使えますか？",
+    a: "入力したレートでの円換算は端末内で計算するため、通信が不安定な場所でもそのままお使いいただけます。旅行前にレートを設定しておくと安心です。",
   },
   {
-    q: "iPhoneとAndroid、どちらに対応しますか？",
-    a: "現在はiPhone向けアプリとして開発しています。",
+    q: "保存したデータはどこにありますか？",
+    a: "保存した買い物の記録は、お使いの端末内に保存されます。詳しくはプライバシーポリシーをご確認ください。",
   },
   {
-    q: "日本円から外貨への換算にも対応しますか？",
-    a: "旅先の価格を日本円の目安に換算することに特化しています（例：$29.99 → 約4,720円）。",
+    q: "Proを解約したら、保存したデータは消えますか？",
+    a: "消えません。解約後も、それまでに保存した記録や旅行のデータは残ります。無料版の上限を超えている分については、新しく追加することができなくなります。",
+  },
+  {
+    q: "解約はどこからできますか？",
+    a: "App Storeの購読管理から、いつでも解約できます。解約後も、購読期間が終わるまではPro版の機能をお使いいただけます。",
+  },
+  {
+    q: "日本円から外貨への換算もできますか？",
+    a: "旅先の価格を日本円の目安に換算することに特化しています（例：₩42,900 → 約4,719円）。",
   },
 ];
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const toggle = (i: number) => {
-    setOpenIndex(openIndex === i ? null : i);
-  };
-
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4">
-        {/* ヘッダー */}
-        <div className="text-center mb-12">
-          <div className="inline-block bg-gray-100 border border-gray-200 text-gray-600 text-sm font-bold px-4 py-1.5 rounded-full mb-4">
-            よくある質問
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900">
+    <section className="bg-white py-16 md:py-24">
+      <div className="mx-auto max-w-3xl px-5">
+        <div className="text-center">
+          <span className="text-[12px] font-bold uppercase tracking-[0.08em] text-brand">
             FAQ
+          </span>
+          <h2 className="mt-3 text-[26px] font-bold leading-snug tracking-tight text-text sm:text-[32px]">
+            よくある質問
           </h2>
         </div>
 
-        {/* アコーディオン */}
-        <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <div
-              key={i}
-              className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
-            >
-              <button
-                onClick={() => toggle(i)}
-                className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
-              >
-                <div className="flex items-start gap-3 flex-1">
-                  <span className="text-blue-600 font-black text-sm flex-shrink-0 mt-0.5">Q.</span>
-                  <span className="text-gray-800 font-bold text-sm sm:text-base">{faq.q}</span>
-                </div>
+        <div className="mt-10 divide-y divide-line2 border-y border-line2">
+          {FAQS.map((f) => (
+            <details key={f.q} className="group py-5">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-[15px] font-bold text-text marker:hidden">
+                <span>{f.q}</span>
                 <span
-                  className={`flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 font-bold text-sm transition-transform duration-200 ${
-                    openIndex === i ? "rotate-180 bg-blue-50 text-blue-600" : ""
-                  }`}
+                  aria-hidden
+                  className="mt-0.5 shrink-0 text-[17px] font-bold text-brand transition-transform group-open:rotate-45"
                 >
-                  ↓
+                  ＋
                 </span>
-              </button>
-
-              {openIndex === i && (
-                <div className="px-6 pb-5 border-t border-gray-50">
-                  <div className="flex items-start gap-3 pt-4">
-                    <span className="text-green-600 font-black text-sm flex-shrink-0 mt-0.5">A.</span>
-                    <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
-                  </div>
-                </div>
-              )}
-            </div>
+              </summary>
+              <p className="mt-3 text-[13.5px] leading-[1.95] text-body">{f.a}</p>
+            </details>
           ))}
-        </div>
-
-        {/* 補足 */}
-        <div className="text-center mt-8">
-          <p className="text-gray-400 text-sm">
-            その他のご質問は、
-            <Link href="/contact" className="text-blue-600 hover:text-blue-700 font-medium">
-              お問い合わせページ
-            </Link>
-            からご連絡ください。
-          </p>
         </div>
       </div>
     </section>

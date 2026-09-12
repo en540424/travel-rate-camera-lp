@@ -1,70 +1,49 @@
-export default function ProblemSection() {
-  const problems = [
-    {
-      icon: "🤔",
-      title: "これ、日本円でいくら？が毎回めんどう",
-      desc: "値札を見るたびに「えーっと…」となる。旅行中ずっとこれが続くのはつらい。",
-    },
-    {
-      icon: "📱",
-      title: "電卓や為替アプリを開くのが地味に手間",
-      desc: "アプリを切り替えて、レートを調べて、計算して…。買い物のたびにこれは疲れる。",
-    },
-    {
-      icon: "😟",
-      title: "気づいたら使いすぎていた",
-      desc: "旅行中って感覚がズレがち。帰国してカード明細を見て後悔するのは避けたい。",
-    },
-    {
-      icon: "🛍️",
-      title: "あの店のほうが安かったかも",
-      desc: "「さっきの雑貨屋と比べてどっちが安い？」をその場で判断できたら便利なのに。",
-    },
-    {
-      icon: "💳",
-      title: "実際にいくら取られるか不安",
-      desc: "両替レートとカードの手数料、どっちで払うのが得なんだろう。円ベースで見たい。",
-    },
-  ];
+const PROBLEMS = [
+  {
+    icon: "?",
+    title: "結局いくら？",
+    desc: "「₩42,900」と言われても、日本円でいくらなのかがとっさに出てこない。",
+  },
+  {
+    icon: "×",
+    title: "毎回スマホで計算",
+    desc: "電卓アプリを開いてレートを打ち直す。店の前で立ち止まる時間がもったいない。",
+  },
+  {
+    icon: "!",
+    title: "使いすぎに後で気づく",
+    desc: "帰国してカードの明細を見て青ざめる。旅行中は合計がわからない。",
+  },
+];
 
+export default function ProblemSection() {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-4">
-        {/* ヘッダー */}
-        <div className="text-center mb-12">
-          <div className="inline-block bg-amber-50 border border-amber-200 text-amber-600 text-sm font-bold px-4 py-1.5 rounded-full mb-4">
-            あるある
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 leading-tight">
-            海外旅行中、こんなこと
-            <br />
-            <span className="text-amber-500">ありませんか？</span>
+    <section className="bg-white py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-5">
+        <div className="mx-auto max-w-xl text-center">
+          <h2 className="text-[26px] font-bold leading-snug tracking-tight text-text sm:text-[30px]">
+            海外での買い物、
+            <br className="sm:hidden" />
+            こんなことありませんか。
           </h2>
         </div>
 
-        {/* 問題カード */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {problems.map((problem, i) => (
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {PROBLEMS.map((p) => (
             <div
-              key={i}
-              className="bg-amber-50 border border-amber-100 rounded-2xl p-5 hover:shadow-md hover:border-amber-200 transition-all duration-200"
+              key={p.title}
+              className="rounded-card-lg border border-line bg-screen p-6"
             >
-              <div className="text-3xl mb-3">{problem.icon}</div>
-              <h3 className="text-base font-bold text-gray-800 mb-2">{problem.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{problem.desc}</p>
+              <span
+                aria-hidden
+                className="flex h-9 w-9 items-center justify-center rounded-[11px] bg-danger-soft text-[17px] font-bold text-danger"
+              >
+                {p.icon}
+              </span>
+              <h3 className="mt-4 text-[16px] font-bold text-text">{p.title}</h3>
+              <p className="mt-2 text-[13.5px] leading-[1.85] text-body">{p.desc}</p>
             </div>
           ))}
-
-          {/* 共感メッセージカード */}
-          <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-5 text-white sm:col-span-2 lg:col-span-1 flex flex-col justify-center">
-            <div className="text-3xl mb-3">💡</div>
-            <p className="text-base font-bold leading-relaxed">
-              旅行中の買い物って、もっとラクにできるはず。
-            </p>
-            <p className="text-sm text-blue-200 mt-2">
-              旅レートカメラは、そのストレスを解消するために生まれました。
-            </p>
-          </div>
         </div>
       </div>
     </section>

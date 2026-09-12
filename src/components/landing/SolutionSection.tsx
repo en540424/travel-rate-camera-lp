@@ -1,84 +1,59 @@
+import PhoneFrame from "@/components/mock/PhoneFrame";
+import ListScreen from "@/components/mock/ListScreen";
+
 export default function SolutionSection() {
-  const steps = [
-    {
-      icon: "📷",
-      title: "カメラで価格を読み取る",
-      desc: "値札の数字にカメラをかざすだけ。OCRが自動で読み取ります。",
-    },
-    {
-      icon: "💱",
-      title: "その場で日本円に換算",
-      desc: "事前に設定した通貨レートで、即座に円換算された金額を表示。",
-    },
-    {
-      icon: "🤔",
-      title: "保存前に価格判断できる",
-      desc: "「4,720円か、買うかな？」その場で判断。不要なものは保存しない。",
-    },
-    {
-      icon: "💾",
-      title: "気になる商品だけ保存",
-      desc: "買い物メモに追加して、後でゆっくり比較できます。",
-    },
-    {
-      icon: "📊",
-      title: "合計・残り予算を確認",
-      desc: "保存した商品の合計金額と、設定した予算との差額をひと目で確認。",
-    },
-  ];
-
   return (
-    <section className="py-20 bg-gradient-to-b from-blue-600 to-blue-700">
-      <div className="max-w-5xl mx-auto px-4">
-        {/* ヘッダー */}
-        <div className="text-center mb-12">
-          <div className="inline-block bg-white/20 text-white text-sm font-bold px-4 py-1.5 rounded-full mb-4">
-            解決策
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight">
-            旅レートカメラなら、
+    <section className="bg-screen py-16 md:py-24">
+      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2">
+        <div className="order-2 md:order-1">
+          <PhoneFrame label="買い物リストと予算の残りを表示しているアプリ画面">
+            <ListScreen />
+          </PhoneFrame>
+        </div>
+
+        <div className="order-1 md:order-2">
+          <span className="text-[12px] font-bold uppercase tracking-[0.08em] text-brand">
+            Solution
+          </span>
+          <h2 className="mt-3 text-[26px] font-bold leading-snug tracking-tight text-text sm:text-[32px]">
+            かざす、わかる、
             <br />
-            <span className="text-cyan-300">値札を見るだけで円換算。</span>
+            残りも見える。
           </h2>
-          <p className="text-blue-200 mt-4 text-base">
-            難しい操作は不要。かざして、見て、保存するだけ。
+          <p className="mt-5 text-[15px] leading-[1.9] text-body">
+            換算はカメラに任せて、あなたは「買うかどうか」だけ決めればいい。
+            保存した買い物は候補と購入済みに分かれて、購入済みの合計から残り予算が自動で引かれます。
           </p>
-        </div>
 
-        {/* フロー */}
-        <div className="flex flex-col gap-3">
-          {steps.map((step, i) => (
-            <div key={i} className="flex items-start gap-4">
-              {/* 矢印ライン */}
-              <div className="flex flex-col items-center flex-shrink-0">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-2xl border border-white/30">
-                  {step.icon}
+          <dl className="mt-7 space-y-4">
+            {[
+              {
+                t: "候補と購入済みを分けて管理",
+                d: "迷っているものは候補のまま。買ったら購入済みに切り替えるだけで合計に反映されます。",
+              },
+              {
+                t: "残り予算がいつでも見える",
+                d: "予算を決めておけば、購入済みの合計を引いた残りが常に表示されます。",
+              },
+              {
+                t: "レートは自分で決められる",
+                d: "両替所やカードの実際のレートを入力できるので、自分の感覚に合う金額で判断できます。",
+              },
+            ].map((item) => (
+              <div key={item.t} className="flex gap-3">
+                <span
+                  aria-hidden
+                  className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand"
+                />
+                <div>
+                  <dt className="text-[15px] font-bold text-text">{item.t}</dt>
+                  <dd className="mt-1 text-[13.5px] leading-[1.85] text-body">
+                    {item.d}
+                  </dd>
                 </div>
-                {i < steps.length - 1 && (
-                  <div className="w-0.5 h-6 bg-white/30 mt-1" />
-                )}
               </div>
-              {/* テキスト */}
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-cyan-300 text-xs font-bold">STEP {i + 1}</span>
-                </div>
-                <h3 className="text-white font-bold text-base mb-1">{step.title}</h3>
-                <p className="text-blue-200 text-sm leading-relaxed">{step.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* 強調メッセージ */}
-        <div className="mt-10 bg-white rounded-3xl p-6 text-center shadow-xl">
-          <div className="text-3xl mb-3">🎯</div>
-          <p className="text-gray-900 font-black text-lg leading-tight">
-            「見る → 円で判断する → 保存する → 合計を見る」
-          </p>
-          <p className="text-gray-500 text-sm mt-2">
-            この流れが、旅行中の買い物をもっとスマートにします。
-          </p>
+            ))}
+          </dl>
         </div>
       </div>
     </section>

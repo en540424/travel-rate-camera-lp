@@ -26,7 +26,7 @@ export default function ContactPage() {
             <div className="text-sm font-bold text-gray-500 mb-2">サポートメール</div>
             <a
               href="mailto:support@e-nexus.shop"
-              className="text-xl sm:text-2xl font-black text-blue-600 hover:text-blue-700 break-all"
+              className="text-xl sm:text-2xl font-black text-brand hover:text-brand-dark break-all"
             >
               support@e-nexus.shop
             </a>
@@ -44,27 +44,27 @@ export default function ContactPage() {
             </p>
             <ul className="space-y-2 text-gray-700 text-[15px]">
               <li className="flex items-start gap-2">
-                <span className="text-blue-600 mt-0.5">・</span>
+                <span className="text-brand mt-0.5">・</span>
                 <span>アプリ名：旅レートカメラ</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-600 mt-0.5">・</span>
+                <span className="text-brand mt-0.5">・</span>
                 <span>ご利用の端末（機種名）</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-600 mt-0.5">・</span>
+                <span className="text-brand mt-0.5">・</span>
                 <span>iOSのバージョン</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-600 mt-0.5">・</span>
+                <span className="text-brand mt-0.5">・</span>
                 <span>どの画面で起きたか</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-600 mt-0.5">・</span>
+                <span className="text-brand mt-0.5">・</span>
                 <span>何をした時に起きたか</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-blue-600 mt-0.5">・</span>
+                <span className="text-brand mt-0.5">・</span>
                 <span>可能であれば、状況が分かるスクリーンショット</span>
               </li>
             </ul>
@@ -77,7 +77,7 @@ export default function ContactPage() {
           </section>
 
           <div className="mt-16">
-            <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            <Link href="/" className="text-brand hover:text-brand-dark text-sm font-medium">
               ← トップページに戻る
             </Link>
           </div>

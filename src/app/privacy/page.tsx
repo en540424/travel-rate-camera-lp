@@ -137,7 +137,7 @@ export default function PrivacyPage() {
               <p className="mt-2">
                 <a
                   href="mailto:support@e-nexus.shop"
-                  className="text-blue-600 hover:text-blue-700 font-medium"
+                  className="text-brand hover:text-brand-dark font-medium"
                 >
                   support@e-nexus.shop
                 </a>
@@ -146,7 +146,7 @@ export default function PrivacyPage() {
           </div>
 
           <div className="mt-16">
-            <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            <Link href="/" className="text-brand hover:text-brand-dark text-sm font-medium">
               ← トップページに戻る
             </Link>
           </div>
