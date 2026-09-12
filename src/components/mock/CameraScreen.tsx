@@ -71,7 +71,7 @@ export default function CameraScreen() {
       {/* 予算サマリー */}
       <div className="flex items-center justify-between text-[8.5px] font-semibold text-muted">
         <span>
-          残り <span className="font-bold text-text tabular">12,710円</span>
+          残り <span className="font-bold text-text tabular">18,890円</span>
         </span>
         <span className="text-brand">手入力で記録</span>
       </div>
