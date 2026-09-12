@@ -4,7 +4,7 @@ import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
 
 export const metadata: Metadata = {
-  title: "お問い合わせ | 旅レートカメラ",
+  title: "お問い合わせ",
   description: "旅レートカメラへのお問い合わせ窓口です。",
 };
 
