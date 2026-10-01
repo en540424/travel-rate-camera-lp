@@ -14,6 +14,16 @@ import { FREE_LIMITS } from "@/lib/appSpec";
  *
  * 事前準備（旅行とレートの設定）は旅行前に1回で済むので、
  * ステップに数えず上の注記に置いている（現地での操作数を実際より多く見せないため）。
+ *
+ * ■ V2（2026-09）のレイアウト
+ * 各ステップは「番号＋タグ → 見出し → 本文 → 端末パネル」の1ブロック（<li>）のまま、
+ * md以上では subgrid で3列の高さを揃え、文章の行数が違っても端末の上端が並ぶようにしている。
+ * 端末は淡いパネル（.panel-phone）に収めて、白地の上で浮かせる。
+ *
+ * ■ desktop（lg以上）の密度
+ * 「3ステップを一目で全部把握できる」を最優先に、見出しは1行に流し、
+ * 番号タイル・タグ・パネルの余白（chrome）を優先して詰める。
+ * 端末は --s 0.29（PhoneFrame は 1280px 以上で xl 値が効く）。本文は16pxのまま。
  */
 const STEPS = [
   {
@@ -44,65 +54,53 @@ const STEPS = [
 
 export default function HowItWorksSection() {
   return (
-    <section id="howto" className="scroll-mt-16 bg-white py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-5">
+    <section id="howto" className="section-pad scroll-mt-20 bg-white lg:py-10">
+      <div className="container-lp max-w-lp">
         <SectionHeading
+          layout="split"
           eyebrow="使い方"
           title={
             <>
               現地でやることは、
-              <br className="sm:hidden" />
-              3手だけ。
+              <br className="lg:hidden" />
+              <span className="text-coral">3手</span>だけ。
             </>
           }
-          lead={
-            <>
-              旅行の作成とレートの入力は、出発前に1回だけ済ませておけます。
-              現地でやるのは、下の3ステップだけです。
-            </>
-          }
+          lead="旅行の作成とレートの入力は、出発前に1回だけ済ませておけます。現地でやるのは、下の3ステップだけです。"
         />
 
-        <ol className="mt-16 grid gap-14 md:grid-cols-3 md:gap-8">
-          {STEPS.map((step, index) => (
-            <li key={step.n} className="relative flex flex-col items-center text-center">
-              {/* ステップ間の矢印（デスクトップのみ） */}
-              {index < STEPS.length - 1 && (
-                <span
-                  aria-hidden
-                  className="absolute -right-4 top-[22px] hidden text-[18px] font-bold text-brand/35 md:block"
-                >
-                  →
-                </span>
-              )}
+        <ol className="mt-[clamp(40px,5vw,54px)] grid gap-x-[clamp(28px,3vw,32px)] gap-y-12 md:grid-cols-3 md:grid-rows-[auto_auto] md:gap-y-[clamp(28px,3vw,32px)] lg:mt-5 lg:gap-x-6 lg:gap-y-5">
+          {STEPS.map((step) => (
+            <li key={step.n} className="grid gap-y-8 md:row-span-2 md:grid-rows-subgrid lg:gap-y-3">
+              <div>
+                <div className="flex items-center gap-3.5">
+                  <span className="flex h-[52px] w-[52px] items-center justify-center rounded-2xl bg-brand text-[24px] lg:h-9 lg:w-9 lg:rounded-xl lg:text-[17px] font-extrabold text-white shadow-[0_12px_24px_-14px_rgba(14,148,136,1)] tabular">
+                    {step.n}
+                  </span>
+                  <span className="rounded-full bg-brand-soft px-3.5 py-[7px] text-[13px] font-extrabold tracking-[0.14em] text-brand-dark lg:px-3 lg:py-1.5 lg:text-[12.5px]">
+                    {step.label}
+                  </span>
+                </div>
 
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand text-[17px] font-bold text-white tabular">
-                  {step.n}
-                </span>
-                <span className="text-[13px] font-bold uppercase tracking-[0.12em] text-brand">
-                  {step.label}
-                </span>
+                <h3 className="mt-5 text-[clamp(21px,2.1vw,22px)] font-extrabold leading-snug tracking-[-0.025em] text-text lg:mt-3 lg:text-[21px]">
+                  {step.title}
+                </h3>
+                <p className="mt-3 text-[16.5px] leading-[1.95] text-body-strong lg:mt-1.5 lg:text-[16px] lg:leading-[1.7]">{step.desc}</p>
               </div>
 
-              <h3 className="mt-5 text-[19px] font-bold leading-snug tracking-[-0.01em] text-text">
-                {step.title}
-              </h3>
-              <p className="mt-2.5 max-w-xs text-[13.5px] leading-[1.9] text-body">
-                {step.desc}
-              </p>
-
-              <PhoneFrame
-                label={step.alt}
-                className="mt-8 [--s:0.52] sm:[--s:0.6] md:[--s:0.44] lg:[--s:0.56]"
-              >
-                {step.screen}
-              </PhoneFrame>
+              <div className="panel-phone flex justify-center px-4 py-7 lg:mx-auto lg:w-fit lg:px-6 lg:py-2">
+                <PhoneFrame
+                  label={step.alt}
+                  className="[--s:0.62] md:[--s:0.46] lg:[--s:0.28] xl:[--s:0.29]"
+                >
+                  {step.screen}
+                </PhoneFrame>
+              </div>
             </li>
           ))}
         </ol>
 
-        <p className="mx-auto mt-14 max-w-xl text-center text-[12.5px] font-medium leading-[1.9] text-muted">
+        <p className="mt-[clamp(32px,3.6vw,40px)] inline-block rounded-2xl border border-[#CFE8E1] bg-brand-soft px-[22px] py-[18px] text-[15.5px] font-semibold leading-[1.85] text-text lg:mt-4 lg:rounded-xl lg:px-4 lg:py-2.5 lg:text-[15px] lg:leading-[1.7]">
           無料版では、1つの旅行につき{FREE_LIMITS.savesPerTrip}件まで保存できます。
           レートは自分で入力する方式なので、換算は端末内で完結します。
         </p>

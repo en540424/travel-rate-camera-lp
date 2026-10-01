@@ -1,3 +1,6 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+
 import { ImageResponse } from "next/og";
 
 /**
@@ -6,8 +9,9 @@ import { ImageResponse } from "next/og";
  * ■ なぜコードで描くか
  * デザイン正本の画像素材をこのrepoに置いていないため、画像ファイルを用意できない。
  * `layout.tsx` は `summary_large_image` を宣言しているので、画像が無いと
- * 共有時に空欄のカードが出る。ブランド要素（ティール／黒面／¥マーク）だけで
+ * 共有時に空欄のカードが出る。ブランド要素（ティール／黒面／アプリアイコン）だけで
  * 組めるので、ここでは next/og で描いている。
+ * アイコンは public/brand/app-icon-512.png（docs/brand の採用referenceから切り出した正式アセット）を読み込む。
  *
  * ■ 使える文字の制約（重要）
  * next/og は必要なフォントを自動で解決するが、**通貨記号「₩」は字形が無く豆腐になる**
@@ -22,7 +26,10 @@ export const alt = "旅レートカメラ｜値札にかざすだけで日本円
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function Image() {
+export default async function Image() {
+  const iconData = await readFile(join(process.cwd(), "public/brand/app-icon-512.png"), "base64");
+  const iconSrc = `data:image/png;base64,${iconData}`;
+
   return new ImageResponse(
     (
       <div
@@ -38,22 +45,8 @@ export default function Image() {
       >
         {/* ブランド */}
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 52,
-              height: 52,
-              borderRadius: 16,
-              background: "#0E9488",
-              color: "#fff",
-              fontSize: 30,
-              fontWeight: 700,
-            }}
-          >
-            ¥
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element -- next/og は <img> で画像を描く */}
+          <img src={iconSrc} width={52} height={52} alt="" />
           <div style={{ color: "#fff", fontSize: 28, fontWeight: 700 }}>旅レートカメラ</div>
         </div>
 

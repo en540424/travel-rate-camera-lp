@@ -7,6 +7,13 @@ import { FREE_LIMITS, LINKS, PRICING } from "@/lib/appSpec";
  * 回答は本体アプリの実装事実に一致させる。
  * 未実装機能（自動為替取得など）を「できる」と書かない。**できないことは、できないと書く。**
  * FAQで終わらせず、末尾に問い合わせ導線と最終CTAへの橋渡しを置く。
+ *
+ * ■ V2（2026-09）の見た目
+ * 罫で区切る一覧から、白いカードを縦に並べる形にして質問／回答の階層をはっきりさせる。
+ * 最初の1問だけ開いた状態にして「開くと回答が出る」ことを示す。
+ *
+ * desktop（lg以上）は11問を一度に多く見渡せるよう、行の高さ・padding・行間gapを詰める
+ * （質問 16.5px / 回答 15.5px の文字サイズは変えない）。
  */
 const FAQS = [
   {
@@ -57,32 +64,36 @@ const FAQS = [
 
 export default function FAQSection() {
   return (
-    <section id="faq" className="ground-warm scroll-mt-16 py-20 md:py-28">
-      <div className="mx-auto max-w-3xl px-5">
-        <SectionHeading eyebrow="FAQ" title="よくある質問" />
+    <section id="faq" className="ground-sand section-pad scroll-mt-20 lg:py-10">
+      <div className="container-lp max-w-[900px]">
+        <SectionHeading tone="coral" eyebrow="FAQ" title="よくある質問" />
 
-        <div className="mt-12 divide-y divide-line border-y border-line">
-          {FAQS.map((faq) => (
-            <details key={faq.q} className="group py-5">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-[15px] font-bold text-text marker:hidden">
+        <div className="mt-[clamp(32px,4vw,48px)] flex flex-col gap-3 lg:mt-3 lg:gap-1.5">
+          {FAQS.map((faq, index) => (
+            <details
+              key={faq.q}
+              open={index === 0}
+              className="group rounded-[18px] border border-faq-border bg-white px-6 py-5 shadow-[0_10px_24px_-22px_rgba(80,60,30,0.5)] lg:rounded-[14px] lg:px-5 lg:py-2"
+            >
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-[17px] font-extrabold leading-[1.6] text-text marker:hidden sm:text-[17.5px] lg:text-[16.5px] lg:leading-[1.45]">
                 <span>{faq.q}</span>
                 <span
                   aria-hidden
-                  className="mt-0.5 shrink-0 text-[17px] font-bold text-brand transition-transform group-open:rotate-45"
+                  className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-soft text-[16px] font-extrabold text-brand-dark transition-transform group-open:rotate-45 lg:mt-0 lg:h-6 lg:w-6 lg:text-[14px]"
                 >
                   ＋
                 </span>
               </summary>
-              <p className="mt-3 text-[13.5px] leading-[1.95] text-body">{faq.a}</p>
+              <p className="mt-4 text-[16px] leading-[2] text-body-strong lg:mt-1.5 lg:pb-1 lg:text-[15.5px] lg:leading-[1.7]">{faq.a}</p>
             </details>
           ))}
         </div>
 
-        <p className="mt-10 text-center text-[13px] leading-[1.9] text-body">
+        <p className="mt-[clamp(32px,4vw,44px)] text-center text-[16px] leading-[1.9] text-body-strong lg:mt-3.5 lg:text-[15.5px]">
           ほかに知りたいことがあれば、
           <a
             href={LINKS.contact}
-            className="font-bold text-brand underline underline-offset-4 hover:text-brand-dark"
+            className="font-extrabold text-brand-dark underline underline-offset-4 hover:text-brand"
           >
             お問い合わせ
           </a>

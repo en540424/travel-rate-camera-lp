@@ -73,6 +73,46 @@
   --radius-card-lg: 18px;
   --radius-button: 15px;
   --radius-phone: 38px;
+
+  /* ── LP専用トークン（アプリ tokens.ts には無い。2026-09 V2 visual rebuild）──
+     ここから下は「LP側で独自の色を足さない」の例外。
+     docs/claude-design-handoff/HANDOFF.md §4-2 の C案（コーラルはLP専用の視線誘導色として少量）に従う。
+     Human最終承認待ち。使用ルール：
+       - coral      : 文字が絡まない視線誘導（罫・ドット・大きな数字・背景の微光）のみ
+       - coral-text : 文字として読ませる強調（白地 5.6:1）。#C2543F（アプリのdanger）より暗く区別する
+       - coral-glow : 暗面の上の小さなドットだけ。面や文字には使わない
+       - CTA・端末モック内・「削除/エラー」文脈には使わない
+     コーラルとティールは輝度がほぼ同じ（1.21:1）なので、色だけに頼らず
+     サイズ・太さ・位置の手がかりを必ず併用する。 */
+  --color-coral: #D9573A;
+  --color-coral-text: #B8422A;
+  --color-coral-glow: #FF8A6B;
+  --color-coral-soft: #FCEBE4;
+  --color-coral-border: #F3D3C7;
+
+  /* LP本文用の濃い本文色（白地 8.6:1）。mock配下は従来どおり --color-body を使う */
+  --color-body-strong: #3D4B48;
+  --color-muted-strong: #63706D;
+
+  /* 暗面の本文（Hero/Screens/Footer）。ink-sub より一段明るい */
+  --color-ink-bright: #C6D5D1;
+  --color-ink-lead: #D3E0DD;
+  --color-ink-soft: #9CB0AB;
+
+  /* 明面の罫・面（LPカード用。line より一段はっきり見える） */
+  --color-line-strong: #DFE8E5;
+  --color-line-card: #E1E8E5;
+  --color-sand: #FBF5EA;
+  --color-sand-border: #F0E6CF;
+  --color-sand-line: #EADFCB;
+  --color-faq-border: #EFE3D0;
+  --color-brand-deep: #08574F;
+
+  --radius-panel: 28px;
+  --radius-card-xl: 26px;
+
+  /* コンテナ幅（max-w-lp）。Design版の 1160px */
+  --container-lp: 1160px;
 }
 
 :root {
@@ -107,12 +147,19 @@ body {
    白カードを並べるだけの単調さを避けるため、セクションごとに地を変える。
    暗い面 → 温かい面 → 白 → 暗い面 … の順で視覚的リズムを作る。 */
 
-/* 暗面（Hero・実画面ギャラリー）。アプリのダークヒーロー面に対応 */
+/* 暗面（Hero）。アプリのダークヒーロー面に対応。右下にコーラルの微光を置き、ティール一色にしない */
 .ground-ink {
   background:
-    radial-gradient(120% 80% at 15% 0%, rgba(14, 148, 136, 0.22) 0%, transparent 60%),
-    radial-gradient(90% 70% at 100% 100%, rgba(224, 165, 59, 0.1) 0%, transparent 58%),
-    linear-gradient(160deg, #16211F 0%, #11201E 55%, #0C1716 100%);
+    radial-gradient(120% 80% at 12% 0%, rgba(14, 148, 136, 0.26) 0%, transparent 60%),
+    radial-gradient(80% 70% at 100% 100%, rgba(217, 87, 58, 0.16) 0%, transparent 58%),
+    linear-gradient(160deg, #16211F 0%, #11201E 55%, #0A1413 100%);
+}
+
+/* 暗面（実画面ギャラリー）。Heroより一段冷たく、右上からティールの光 */
+.ground-ink-alt {
+  background:
+    radial-gradient(100% 70% at 80% 0%, rgba(14, 148, 136, 0.22) 0%, transparent 62%),
+    linear-gradient(170deg, #0F1C1A 0%, #13201E 50%, #0A1413 100%);
 }
 
 /* 暗面の上に敷く方眼。アプリアイコンのグリッド意匠に対応（画像を使わずCSSのみ） */
@@ -124,21 +171,63 @@ body {
   mask-image: radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 75%);
 }
 
-/* 温かい面（課題提示・利用シーン）。candidate系の極薄 */
+/* 砂色の面（課題提示）。白より一段温かく、コーラルの罫が映える */
 .ground-warm {
-  background: linear-gradient(180deg, #FAF3E6 0%, #FDF9F1 48%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #F6EDDE 0%, #FBF5EA 55%, #FDF9F2 100%);
 }
 
-/* ティールの極薄面（機能紹介・料金の導入） */
+/* 砂色の面・淡（FAQ）。白カードを並べるので地はさらに薄く */
+.ground-sand {
+  background: linear-gradient(180deg, #F9F2E6 0%, #FCF7EE 60%, #FEFBF6 100%);
+}
+
+/* ティールの淡い面（機能紹介）。上端をはっきり色付けて、下で白に溶かす */
 .ground-mint {
-  background: linear-gradient(180deg, #E4F4EF 0%, #F2FBF8 45%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #DFF1EC 0%, #EFF9F6 42%, #FFFFFF 100%);
 }
 
-/* 最終CTA。ティール→暗面。CTA面だけ彩度を上げて着地させる */
+/* 最終CTA。ティール→暗面。左上にティール、右下にコーラルの光で着地させる */
 .ground-cta {
   background:
-    radial-gradient(90% 120% at 20% 0%, rgba(127, 216, 204, 0.28) 0%, transparent 62%),
-    linear-gradient(150deg, #0A766E 0%, #0E5F59 46%, #11201E 100%);
+    radial-gradient(90% 120% at 18% 0%, rgba(127, 216, 204, 0.3) 0%, transparent 62%),
+    radial-gradient(70% 90% at 100% 100%, rgba(217, 87, 58, 0.22) 0%, transparent 60%),
+    linear-gradient(150deg, #0A766E 0%, #0C5B55 46%, #11201E 100%);
+}
+
+/* Pro価格カードの面。ティールの濃いグラデーション */
+.ground-pro {
+  background: linear-gradient(155deg, #0A766E 0%, #086158 52%, #0B4A45 100%);
+}
+
+/* 機能紹介の濃色カード */
+.ground-card-dark {
+  background: linear-gradient(165deg, #16211F 0%, #0F1C1A 60%, #0A1413 100%);
+}
+
+/* 端末モックを収める淡いパネル（使い方セクション）。白地の上で端末を浮かせる */
+.panel-phone {
+  background: linear-gradient(180deg, #EFF5F3 0%, #F7FAF9 100%);
+  border: 1px solid #E3EBE8;
+  border-radius: var(--radius-panel);
+}
+
+/* ── レイアウト共通 ────────────────────────────────────────────
+   セクションの縦余白と横の内側余白を1か所で決める。
+   使い方: <section class="section-pad"><div class="container-lp max-w-lp">…
+   幅は max-w-lp（1160px）を基本に、FAQ・料金など狭くしたい所だけ max-w-* を差し替える。
+   @utility で定義しているのは、Tailwindの max-w-* と同じ層に置いて上書きを効かせるため。 */
+@utility section-pad {
+  padding-block: clamp(76px, 9vw, 84px);
+  /* desktop: セクションの上下枠を詰める。中身の文字は縮めず、枠で密度を作る */
+  @media (width >= 1024px) {
+    padding-block: 48px;
+  }
+}
+
+@utility container-lp {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 40px);
 }
 
 .gradient-pro {
